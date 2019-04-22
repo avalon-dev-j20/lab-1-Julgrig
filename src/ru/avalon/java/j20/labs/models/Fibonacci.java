@@ -18,23 +18,43 @@ import java.util.Iterator;
  */
 public class Fibonacci implements Iterable<Integer> {
 
+    private final Integer[] array;  // Task 3 # 1
+
+    // Task 3  Конструктор, где прописывается что можно указывать количество чисел  при создании экземпляра класса.
+    public Fibonacci(int size) {
+        this.array = new Integer[size];
+        if (array.length > 1) {
+            array[0] = 0;
+            if (array.length > 2) {
+                array[1] = 1;
+                for (int i = 2; i < array.length; i++) {
+                    array[i] = array[i - 1] + array[i - 2];
+                }
+            }
+        }
+    }
+
+
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
      */
-    private static class FibonacciIterator implements Iterator<Integer> {
+    private class FibonacciIterator implements Iterator<Integer> {
+        private int currentIndex = 0;
+
+
 
         /**
          * Определяет, есть ли следующее значение
          * последовательности чисел Фибоначчи.
          *
          * @return {@code true}, если следующее число
-         * последовательности существует. В обратном случае
+         * последовательности существует. В обратном случа
          * {@code false}.
          */
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            return currentIndex < array.length && array[currentIndex] != null;
         }
 
         /**
@@ -45,8 +65,10 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public Integer next() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            return array[currentIndex++];
         }
+
+
     }
 
     /**
@@ -58,5 +80,8 @@ public class Fibonacci implements Iterable<Integer> {
     @Override
     public Iterator<Integer> iterator() {
         return new FibonacciIterator();
+    }
+    public Integer[] getArray() {
+        return array;
     }
 }
