@@ -1,6 +1,7 @@
 package ru.avalon.java.j20.labs.models;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
@@ -64,7 +65,7 @@ public class Fibonacci implements Iterable<Integer> {
          * @return следующее число последовательности.
          */
         @Override
-        public Integer next() {
+        public Integer next() throws NoSuchElementException {
             return array[currentIndex++];
         }
 
