@@ -68,7 +68,12 @@ public class Fibonacci implements Iterable<Integer> {
             return array[currentIndex++];
         }
 
-
+        /**
+        Реализуем интерфейс Iterator (c типом элементов Integer, который возвращает итератор) в классе FibonacciIterator.
+        Переопределяем два метода hasNext и next.
+        Соответственно hasNext возвращает boolean.
+        Метод next возвращает Integer, согласно контракту.
+        Не понятно в чем нарушен контракт.*/
     }
 
     /**
