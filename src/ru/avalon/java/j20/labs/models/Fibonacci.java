@@ -1,10 +1,12 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
- *
+ * <p>
  * <p>Числа Фибонааччи (иногда пишут Фибона́чи[1]) — элементы
  * числовой последовательности 0, 1, 1, 2, 3, 5, 8, 13, 21,
  * 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181,
@@ -18,23 +20,42 @@ import java.util.Iterator;
  */
 public class Fibonacci implements Iterable<Integer> {
 
+    private final Integer[] array;  // Task 3 # 1
+
+    // Task 3  Конструктор, где прописывается что можно указывать количество чисел  при создании экземпляра класса.
+    public Fibonacci(int size) {
+        this.array = new Integer[size];
+        if (array.length > 1) {
+            array[0] = 0;
+            if (array.length > 2) {
+                array[1] = 1;
+                for (int i = 2; i < array.length; i++) {
+                    array[i] = array[i - 1] + array[i - 2];
+                }
+            }
+        }
+    }
+
+
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
      */
-    private static class FibonacciIterator implements Iterator<Integer> {
+    private class FibonacciIterator implements Iterator<Integer> {
+        private int currentIndex = 0;
+
 
         /**
          * Определяет, есть ли следующее значение
          * последовательности чисел Фибоначчи.
          *
          * @return {@code true}, если следующее число
-         * последовательности существует. В обратном случае
+         * последовательности существует. В обратном случа
          * {@code false}.
          */
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            return currentIndex < array.length;
         }
 
         /**
@@ -43,10 +64,20 @@ public class Fibonacci implements Iterable<Integer> {
          *
          * @return следующее число последовательности.
          */
+
         @Override
         public Integer next() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            if (currentIndex >= array.length)
+                throw new NoSuchElementException();
+            return array[currentIndex++];
         }
+
+        /**
+         Реализуем интерфейс Iterator (c типом элементов Integer, который возвращает итератор) в классе FibonacciIterator.
+         Переопределяем два метода hasNext и next.
+         Соответственно hasNext возвращает boolean.
+         Метод next возвращает Integer, согласно контракту.
+         Не понятно в чем нарушен контракт.*/
     }
 
     /**
@@ -58,5 +89,9 @@ public class Fibonacci implements Iterable<Integer> {
     @Override
     public Iterator<Integer> iterator() {
         return new FibonacciIterator();
+    }
+
+    public Integer[] getArray() {
+        return array;
     }
 }
