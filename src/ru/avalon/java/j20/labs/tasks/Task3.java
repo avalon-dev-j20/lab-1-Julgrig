@@ -16,7 +16,6 @@ public class Task3 implements Task {
     public void run() {
 
         Fibonacci fibonacci = new Fibonacci(20); // Task 3 # 2
-        fibonacci.getArray(); //  возвращает последовательность чисел Фибоначчи длиной в 20 элементов.
         int sum = 0;
         for (Integer value : fibonacci) {
             sum += value;  // Task 3 # 3  сумма  чисел последовательности Фибоначчи:

@@ -54,7 +54,7 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public boolean hasNext() {
-            return currentIndex < array.length && array[currentIndex] != null;
+            return currentIndex < array.length;
         }
 
         /**
