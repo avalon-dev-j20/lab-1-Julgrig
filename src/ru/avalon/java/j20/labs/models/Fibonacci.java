@@ -1,11 +1,12 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
- *
+ * <p>
  * <p>Числа Фибонааччи (иногда пишут Фибона́чи[1]) — элементы
  * числовой последовательности 0, 1, 1, 2, 3, 5, 8, 13, 21,
  * 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181,
@@ -44,7 +45,6 @@ public class Fibonacci implements Iterable<Integer> {
         private int currentIndex = 0;
 
 
-
         /**
          * Определяет, есть ли следующее значение
          * последовательности чисел Фибоначчи.
@@ -64,17 +64,20 @@ public class Fibonacci implements Iterable<Integer> {
          *
          * @return следующее число последовательности.
          */
+
         @Override
-        public Integer next() throws NoSuchElementException {
+        public Integer next() {
+            if (currentIndex >= array.length)
+                throw new NoSuchElementException();
             return array[currentIndex++];
         }
 
         /**
-        Реализуем интерфейс Iterator (c типом элементов Integer, который возвращает итератор) в классе FibonacciIterator.
-        Переопределяем два метода hasNext и next.
-        Соответственно hasNext возвращает boolean.
-        Метод next возвращает Integer, согласно контракту.
-        Не понятно в чем нарушен контракт.*/
+         Реализуем интерфейс Iterator (c типом элементов Integer, который возвращает итератор) в классе FibonacciIterator.
+         Переопределяем два метода hasNext и next.
+         Соответственно hasNext возвращает boolean.
+         Метод next возвращает Integer, согласно контракту.
+         Не понятно в чем нарушен контракт.*/
     }
 
     /**
@@ -87,6 +90,7 @@ public class Fibonacci implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return new FibonacciIterator();
     }
+
     public Integer[] getArray() {
         return array;
     }
